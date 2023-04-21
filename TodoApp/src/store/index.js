@@ -7,7 +7,7 @@ const store = createStore({
   },
   mutations: {
     ADD_TODO(state, todo) {
-      state.todos.push(todo);
+      state.todos.unshift(todo);
     },
     REMOVE_TODO(state, index) {
       state.todos.splice(index, 1);
@@ -28,7 +28,7 @@ const store = createStore({
     },
   },
   getters: {
-    getTodos(state) {
+    todos(state) {
       return state.todos;
     },
   },

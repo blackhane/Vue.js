@@ -1,17 +1,25 @@
 <script>
+import { useStore } from "vuex";
+import { computed } from "vue";
 export default {
   name: "Item",
   setup() {
-    return {};
+    const store = useStore();
+    const todos = computed(() => store.getters.todos);
+
+    const btnDelete = function (index) {
+      store.dispatch("removeTodo", index);
+    };
+    return { todos, btnDelete };
   },
 };
 </script>
 
 <template>
-  <li>
+  <li v-for="(todo, index) in todos">
     <i class="fa-solid fa-check"></i>
-    공부하기
-    <button>삭제</button>
+    {{ todo }}
+    <button @click="btnDelete(index)">삭제</button>
   </li>
 </template>
 

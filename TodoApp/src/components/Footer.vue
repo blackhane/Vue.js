@@ -1,15 +1,21 @@
 <script>
+import { useStore } from "vuex";
+
 export default {
   name: "Footer",
   setup() {
-    return {};
+    const store = useStore();
+    const btnClear = function () {
+      store.dispatch("clearTodo");
+    };
+    return { btnClear };
   },
 };
 </script>
 
 <template>
   <footer>
-    <button>Clear All</button>
+    <button @click="btnClear">Clear All</button>
   </footer>
 </template>
 
@@ -22,6 +28,8 @@ footer {
 footer > button {
   width: 100px;
   height: 30px;
-  color: #e20303;
+  background: #e20303;
+  color: #fff;
+  border: none;
 }
 </style>

@@ -14,7 +14,9 @@ export default {
 
 <template>
   <main>
-    <ul></ul>
+    <ul>
+      <Item></Item>
+    </ul>
   </main>
 </template>
 
