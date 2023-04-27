@@ -68,7 +68,7 @@ const btnLogin = function () {
     return false;
   }
   axios
-    .post("http://localhost:8080/Vboard/user/login", user)
+    .post("http://43.201.83.163:8282/Vboard/user/login", user)
     .then((response) => {
       console.log(response.data);
       const accessToken = response.data.accessToken;

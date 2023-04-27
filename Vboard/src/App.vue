@@ -17,7 +17,7 @@ onBeforeMount(() => {
     router.push("/user/login");
   } else {
     axios
-      .get("http://localhost:8080/Vboard/user/auth", {
+      .get("http://43.201.83.163:8282/Vboard/user/auth", {
         headers: { "X-AUTH-TOKEN": accessToken },
       })
       .then((response) => {

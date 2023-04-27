@@ -21,28 +21,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="text-center">1</td>
-                <td class="text-left">
-                  <a href="#" @click="viewDetail">제목입니다.</a>
+              <tr v-for="(article, index) in state.data.articles">
+                <td class="text-center">
+                  {{ state.data.count - state.data.pageStartNum - index }}
                 </td>
-                <td class="text-center">길동</td>
-                <td class="text-center">12</td>
-                <td class="text-center">23-04-25</td>
-              </tr>
-              <tr>
-                <td class="text-center">1</td>
-                <td class="text-left">제목입니다.</td>
-                <td class="text-center">길동</td>
-                <td class="text-center">12</td>
-                <td class="text-center">23-04-25</td>
-              </tr>
-              <tr>
-                <td class="text-center">1</td>
-                <td class="text-left">제목입니다.</td>
-                <td class="text-center">길동</td>
-                <td class="text-center">12</td>
-                <td class="text-center">23-04-25</td>
+                <td class="text-left">
+                  <a href="#" @click="viewDetail">{{ article.title }}</a>
+                </td>
+                <td class="text-center">{{ article.uid }}</td>
+                <td class="text-center">{{ article.hit }}</td>
+                <td class="text-center">{{ article.rdate }}</td>
               </tr>
             </tbody>
           </v-table>
@@ -50,9 +38,11 @@
             <v-btn color="primary" @click="btnWrite">글쓰기</v-btn>
           </v-sheet>
           <v-pagination
-            :length="15"
-            :total-visible="10"
+            :length="state.lastPageNum"
+            :total-visible="5"
             rounded="circle"
+            v-model="state.pg"
+            @click="getList"
           ></v-pagination>
         </v-sheet>
       </v-container>
@@ -63,12 +53,39 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { computed, onBeforeMount } from "vue";
+import { reactive, computed, onBeforeMount } from "vue";
+import axios from "axios";
 
 const router = useRouter();
 const userStore = useStore();
 
 const user = computed(() => userStore.getters.user);
+
+const state = reactive({
+  data: {},
+  lastPageNum: 0,
+  pg: 1,
+});
+
+const getList = function () {
+  getArticles();
+};
+
+onBeforeMount(() => {
+  getArticles();
+});
+
+const getArticles = function () {
+  axios
+    .get("http://43.201.83.163:8282/Vboard/list", { params: { pg: state.pg } })
+    .then((response) => {
+      state.data = response.data;
+      state.lastPageNum = response.data.lastPageNum;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 const btnWrite = function () {
   router.push("/write");
