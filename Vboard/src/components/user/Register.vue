@@ -216,7 +216,7 @@ const btnCheckUid = () => {
   } else {
     checkUidLoading.value = true;
     axios
-      .get("http://43.201.83.163:8282/Vboard/user/countUid", {
+      .get("/user/countUid", {
         params: { uid: user.uid },
       })
       .then((response) => {
@@ -243,7 +243,7 @@ const btnCancel = function () {
 };
 const btnRegister = function () {
   axios
-    .post("http://43.201.83.163:8282/Vboard/user/register", user)
+    .post("/user/register", user)
     .then((response) => {
       router.push("/list");
     })

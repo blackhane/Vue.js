@@ -77,7 +77,7 @@ onBeforeMount(() => {
 
 const getArticles = function () {
   axios
-    .get("http://43.201.83.163:8282/Vboard/list", { params: { pg: state.pg } })
+    .get("/list", { params: { pg: state.pg } })
     .then((response) => {
       state.data = response.data;
       state.lastPageNum = response.data.lastPageNum;
