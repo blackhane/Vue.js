@@ -71,7 +71,7 @@ const data = reactive({
 
 onBeforeMount(() => {
   axios
-    .get("http://43.201.83.163:8282/Vboard/user/terms")
+    .get("/user/terms")
     .then((response) => {
       data.terms = response.data.terms;
       data.privacy = response.data.privacy;

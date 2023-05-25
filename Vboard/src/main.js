@@ -9,6 +9,7 @@ import App from "./App.vue";
 
 // Composables
 import { createApp } from "vue";
+import axios from "axios";
 
 // Plugins
 import { registerPlugins } from "@/plugins";
@@ -22,3 +23,9 @@ registerPlugins(app);
 app.use(router);
 app.use(userStore);
 app.mount("#app");
+
+//axios 전역설정
+//개발주소
+axios.defaults.baseURL = "http://localhost:8282";
+//배포주소
+//axios.defaults.baseURL = "http://43.201.83.163:8282";

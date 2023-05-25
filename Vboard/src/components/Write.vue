@@ -73,7 +73,7 @@ const btnCancel = function () {
 };
 const btnWrite = function () {
   axios
-    .post("http://43.201.83.163:8282/Vboard/write", article)
+    .post("/write", article)
     .then((response) => {
       dialog.value = true;
     })
